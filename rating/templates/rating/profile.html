@@ -1,0 +1,40 @@
+{% load static %}
+{% block profile %}
+<title>RateUp | Profile</title>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<style>
+    input{
+        width: 100%;
+        height: 45px;
+        border: solid 1px #4d4d4d;
+        border-radius: 22px;
+        background-color: transparent;
+        margin-bottom: 20px;
+    }
+</style>
+<div class="container-fluid row text-light" style="background-color: #121212">
+    <div class="col-3 ps-3 pe-3 pt-5"><br>
+        
+    </div>
+    <div align="center" id="p_main" class="col-6 p-0 mb-3 mt-3">
+        <div class="bg-dark me-2 ms-3 mb-5 mt-3" style="border-radius: 125px; width: 250px; height: 250px">
+
+        </div>
+        <div align="left" class="col-9">
+            <form method="post">
+                <span>Firstname</span><br>
+                {{form.first_name}}<br>
+                <span>Lastname</span><br>
+                {{form.last_name}}<br>
+                <span>Username</span><br>
+                {{form.username}}<br>
+                <span>Email</span><br>
+                {{form.email}}
+                <input class="btn btn-light" type="submit" value="Upadate profile">
+            </form>
+        </div>
+    </div>
+    <div class="col-3"></div>
+</div>
+{% endblock %}

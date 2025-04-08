@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.Home, name='home'),
     path('post/<int:pk>', views.PostDetail, name='post-detail'),
-    path('post/create-post', views.CreatePost, name='create-post')
+    path('post/create-post', views.CreatePost, name='create-post'),
+    path('profile/', views.Profile, name='profile')
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

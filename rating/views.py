@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django import forms
 from .models import Post, Comment
-from .forms import PostForm
+from .forms import PostForm, UserForm
 
 # Create your views here.
 def Home(request):
@@ -25,6 +26,7 @@ def PostDetail(request, pk):
     return render(request, 'rating/post_detail.html', context)
 
 def CreatePost(request):
+    post_form = PostForm(initial={'post_author': request.user})
     if request.method == 'POST':
         # author = request.POST.get('post_author')
         # caption = request.POST.get('post_caption')
@@ -33,10 +35,15 @@ def CreatePost(request):
         # post = Post.objects.create(post_author=author, post_caption=caption, post_img=img)
         # post.save()
         form = PostForm(request.POST, request.FILES)
-        form.fields['post_author'].initial = 'Praise'
-
+        
         if form.is_valid():
             form.save()
         print(request.POST)
         
-    return render(request, 'rating/create_post.html', {'form': PostForm})
+    return render(request, 'rating/create_post.html', {'form': post_form})
+
+def Profile(request):
+    context = {
+        'form': UserForm
+    }
+    return render(request, 'rating/profile.html', context)

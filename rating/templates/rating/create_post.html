@@ -44,9 +44,14 @@
                 <div id="profile-dp"></div>
                 <div class="ms-2" style="color: white">Praise <br> @thenewsun</div>
             </div>
+            {{request.user}}
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{form}}
+                <div style="display: none">
+                    {{form.post_author}}
+                </div>
+                {{form.post_caption}}
+                {{form.post_img}}
                 <input id="create" type="submit" value="Create">
             </form>
         </div>
