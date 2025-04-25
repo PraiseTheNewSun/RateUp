@@ -23,8 +23,10 @@ from rating import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.Home, name='home'),
+    path('dashboard/', views.Dashboard, name='dashboard'),
+    path('login/', views.Login, name='login'),
     path('post/<int:pk>', views.PostDetail, name='post-detail'),
     path('post/create-post', views.CreatePost, name='create-post'),
-    path('profile/', views.Profile, name='profile')
+    path('profile/', views.ProfilePage, name='profile')
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

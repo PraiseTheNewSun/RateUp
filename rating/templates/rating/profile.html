@@ -8,9 +8,14 @@
         width: 100%;
         height: 45px;
         border: solid 1px #4d4d4d;
-        border-radius: 22px;
+        border-radius: 10px;
         background-color: transparent;
         margin-bottom: 20px;
+        color: white;
+        padding-left: 10px;
+    }
+    input::placeholder{
+        color: #999999;
     }
 </style>
 <div class="container-fluid row text-light" style="background-color: #121212">
@@ -19,20 +24,19 @@
     </div>
     <div align="center" id="p_main" class="col-6 p-0 mb-3 mt-3">
         <div class="bg-dark me-2 ms-3 mb-5 mt-3" style="border-radius: 125px; width: 250px; height: 250px">
-
+            <img src="{{profile.img.url}}" >
         </div>
         <div align="left" class="col-9">
             <form method="post">
-                <span>Firstname</span><br>
-                {{form.first_name}}<br>
-                <span>Lastname</span><br>
-                {{form.last_name}}<br>
-                <span>Username</span><br>
-                {{form.username}}<br>
-                <span>Email</span><br>
-                {{form.email}}
-                <input class="btn btn-light" type="submit" value="Upadate profile">
+                {%csrf_token%}
+                {{profile_form.first_name}}
+                {{profile_form.last_name}}
+                {{profile_form.username}}
+                {{profile_form.email}}
+                {{profile_form.img}}
+                <input class="btn btn-light" type="submit" value="Update profile">
             </form>
+            
         </div>
     </div>
     <div class="col-3"></div>
