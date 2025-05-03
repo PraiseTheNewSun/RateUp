@@ -25,8 +25,8 @@ urlpatterns = [
     path('', views.Home, name='home'),
     path('dashboard/', views.Dashboard, name='dashboard'),
     path('login/', views.Login, name='login'),
-    path('post/<int:pk>', views.PostDetail, name='post-detail'),
-    path('post/create-post', views.CreatePost, name='create-post'),
-    path('profile/', views.ProfilePage, name='profile')
+    path('dashboard/post/<int:pk>', views.PostDetail, name='post-detail'),
+    path('dashboard/post/create-post', views.CreatePost, name='create-post'),
+    path('dashboard/profile/', views.ProfilePage, name='profile')
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

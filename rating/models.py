@@ -18,10 +18,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.author
-    
-# class Profile(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     img = models.ImageField(upload_to='profiles/')
 
 class Detail(AbstractUser):
-    img = models.ImageField(upload_to='profile/')
+    img = models.ImageField(upload_to='media/', null=True)
+    
+class ProfileImage(models.Model):
+    image_user = models.CharField(max_length=300)
+    img = models.ImageField(upload_to='media/media')

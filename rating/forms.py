@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Post, Comment, Detail
+from .models import Post, Comment, Detail, ProfileImage
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -47,6 +47,16 @@ class ProfileForm(forms.ModelForm):
         self.fields['last_name'].widget.attrs['placeholder'] = 'Lastname'
         self.fields['username'].widget.attrs['placeholder'] = 'Username'
         self.fields['email'].widget.attrs['placeholder'] = 'Email'
+
+class ProfileImageForm(forms.ModelForm):
+    class Meta:
+        model = ProfileImage
+        fields = ['image_user', 'img']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(self, *args, **kwargs)
+
+        self.fields['image_user'].widget.attrs['placeholder'] = 'Username'
 
 class SignUpForm(forms.ModelForm):
     class Meta:
