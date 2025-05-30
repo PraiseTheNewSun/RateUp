@@ -20,8 +20,12 @@ class Comment(models.Model):
         return self.author
 
 class Detail(AbstractUser):
-    img = models.ImageField(upload_to='media/', null=True)
-    
+    # img = models.ImageField(upload_to='media/', null=True)
+    pass
+
 class ProfileImage(models.Model):
-    image_user = models.CharField(max_length=300)
-    img = models.ImageField(upload_to='media/media')
+    image_user = models.CharField(max_length=300, null=True)
+    img = models.ImageField(upload_to='media/', null=True, default='media/tlok.jpeg')
+
+    def __str__(self):
+        return self.image_user

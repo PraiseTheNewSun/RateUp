@@ -38,7 +38,7 @@ class CommentForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Detail
-        fields = ['first_name', 'last_name', 'username', 'email', 'img']
+        fields = ['first_name', 'last_name', 'username', 'email']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -55,8 +55,6 @@ class ProfileImageForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(self, *args, **kwargs)
-
-        self.fields['image_user'].widget.attrs['placeholder'] = 'Username'
 
 class SignUpForm(forms.ModelForm):
     class Meta:

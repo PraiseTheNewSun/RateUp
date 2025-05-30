@@ -68,12 +68,13 @@
             </div>
             <div align="center" class="col-4">
                 <div align="left" class="form col-10 ps-3 pe-3 pt-3 pb-5">
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <h3 class="text-secondary">Create an account</h3>
                         {{form.first_name}}
                         {{form.last_name}}
                         {{form.username}}
+                        {{form.email}}
                         {{form.password}}
                         <input class="btn btn-outline-light" type="submit" value="Sign Up">
                     </form>
