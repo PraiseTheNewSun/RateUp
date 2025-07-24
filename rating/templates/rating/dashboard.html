@@ -53,6 +53,7 @@
 <body style="background-color: #121212;">
     <div class="container-fluid vh-100 row text-light">
         <div class="col-3 ps-3 pe-3 pt-5"><br>
+          <div style="position: fixed">
             <div class="bg-dark me-2 ms-3 mb-5" style="border-radius: 125px; width: 250px; height: 250px">
                 {%if photo.img != None%}
                     <img id="profile" src="{{photo.img.url}}" width="250px" height="250px" >
@@ -66,6 +67,7 @@
                 <button class="mb-3" id="nav">Profile</button>
             </a><br>
             <a href="{% url 'create-post' %}"><button class="mb-3" id="navp">Post</button></a>
+          </div>
         </div>
         <div id="main" class="col-6 p-0 pb-5">
             <div class="pt-2 pb-2" align="center" style="border-bottom: solid 1px #4d4d4d;"><span>Latest posts</span></div>
@@ -73,9 +75,9 @@
             <div id="post" class="mt-3">
                 <div class="d-flex ms-3">
                     <div id="profile-dp">
-                      {%for i in userss%}
-                        {%if i.username == post.post_author%}
-                            <img id="profile_post" src="{{photo.img.url}}" width="50px" height="50px" >
+                      {%for i in post_user%}
+                        {%if i.image_user == post.post_author%}
+                            <img id="profile_post" src="{{i.img.url}}" width="50px" height="50px">
                         {%else%}
                             <img id="profile_post" style="padding-top: 50px" alt="N" >
                         {%endif%}

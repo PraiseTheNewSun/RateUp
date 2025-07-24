@@ -25,7 +25,7 @@ class Detail(AbstractUser):
 
 class ProfileImage(models.Model):
     image_user = models.CharField(max_length=300, null=True)
-    img = models.ImageField(upload_to='media/', null=True, default='media/tlok.jpeg')
+    img = models.ImageField(upload_to='media/profiles/', null=True)
 
     def __str__(self):
         return self.image_user

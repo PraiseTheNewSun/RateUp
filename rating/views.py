@@ -39,20 +39,12 @@ def Login(request):
 @login_required
 def Dashboard(request):
     posts= Post.objects.all()
-    users= Detail.objects.get(username=posts.post_author)
-    print(users)
-    # user_list = []
-    # for i in users:
-    #     for j in posts:
-    #         if j.post_author == i.username:
-    #             print(i.first_name)
-    #             user_list.append(i)
     try:
         photo = ProfileImage.objects.get(image_user=request.user)
         context = {
         'posts': Post.objects.all(),
         'photo': photo,
-        'userss': user_list
+        'post_user': ProfileImage.objects.all()
         }
         return render(request, 'rating/dashboard.html', context)
     except Exception:
@@ -67,14 +59,14 @@ def PostDetail(request, pk):
     comment_form = CommentForm(initial={'author': request.user, 'post_caption': post.post_caption})
     if request.method == 'POST':
         form = CommentForm(request.POST)
-        print(request.POST)
         if form.is_valid():
             form.save()
 
     context = {
         'post': Post.objects.get(id=pk),
         'comments': Comment.objects.filter(post_caption=post.post_caption),
-        'form': comment_form
+        'form': comment_form,
+        'post_user': ProfileImage.objects.all()
     }
     return render(request, 'rating/post_detail.html', context)
 
@@ -86,9 +78,8 @@ def CreatePost(request):
 
         if form.is_valid():
             form.save()
-        print(request.POST)
 
-    return render(request, 'rating/create_post.html', {'form': post_form})
+    return render(request, 'rating/create_post.html', {'form': post_form, 'creator': ProfileImage.objects.get(image_user=request.user)})
 
 @login_required
 def ProfilePage(request):
@@ -97,22 +88,23 @@ def ProfilePage(request):
     try:
         photo = ProfileImage.objects.get(image_user=request.user)
         image.append(photo)
-        print('Successfull')
     except Exception:
-        print('Not Found')
+        pass
     if request.method == 'POST':
-        print(request.POST)
         username  = request.POST.get('username')
         img = request.FILES['img']
-        profile_photo = ProfileImage.objects.create(image_user=username, img=img)
-        profile_photo.save()
+        pp = ProfileImage.objects.get(image_user=username)
+        if pp == None:
+            profile_photo = ProfileImage.objects.create(image_user=username, img=img)
+            profile_photo.save()
+        else:
+            profile_p = ProfileImage.objects.update(image_user=username, img=img)
         profile_form = ProfileForm(request.POST)
-        print(request.POST, request.FILES['img'])
         if profile_form.is_valid():
             profile_form.save(img=request.FILES['img'])
     context = {
         'profile_form': ProfileForm(initial={'first_name': profile.first_name, 'last_name': profile.last_name, 'username': profile.username, 'email': profile.email}),
         'profile': profile,
-        'photo': image[0] or image
+        'photo': image[0]
     }
     return render(request, 'rating/profile.html', context)
